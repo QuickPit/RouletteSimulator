@@ -32,3 +32,22 @@ test('Gleichverteilung (Chi-Quadrat-Test über 1 Mio. Ziehungen)', () => {
   // 36 Freiheitsgrade: kritischer Wert für p = 0,0001 liegt bei ≈ 77,6.
   assert.ok(chi2 < 77.6, `Chi² = ${chi2.toFixed(1)} deutet auf ungleiche Verteilung hin`);
 });
+
+test('aufeinanderfolgende Ziehungen sind unabhängig (Chi-Quadrat über alle 37×37 Paare)', () => {
+  const draws = 1_000_000;
+  const pairs = new Float64Array(37 * 37);
+  let prev = drawNumber();
+  let repeats = 0;
+  for (let i = 0; i < draws; i++) {
+    const n = drawNumber();
+    pairs[prev * 37 + n]++;
+    if (n === prev) repeats++;
+    prev = n;
+  }
+  const expected = draws / pairs.length;
+  const chi2 = pairs.reduce((sum, c) => sum + (c - expected) ** 2 / expected, 0);
+  // 1368 Freiheitsgrade: kritischer Wert für p = 0,0001 liegt bei ≈ 1580.
+  assert.ok(chi2 < 1580, `Chi² = ${chi2.toFixed(0)} deutet auf Abhängigkeit zwischen Ziehungen hin`);
+  // Direkte Wiederholung muss mit 1/37 ≈ 2,70 % auftreten.
+  assert.ok(Math.abs(repeats / draws - 1 / 37) < 0.001, `Wiederholungsrate ${(repeats / draws * 100).toFixed(3)} %`);
+});
