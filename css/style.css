@@ -33,7 +33,6 @@
 
   --pad: clamp(14px, 2.2vw, 30px);
   --gap: clamp(14px, 2vw, 28px);
-  --disc: min(22vw, 36dvh);
 }
 
 *,
@@ -70,7 +69,7 @@ body {
 .table {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(220px, 25vw, 340px) clamp(112px, 11vw, 160px);
+  grid-template-columns: minmax(0, 1fr) clamp(220px, 25vw, 460px) clamp(112px, 11vw, 190px);
   gap: var(--gap);
   height: 100dvh;
   padding: max(var(--pad), env(safe-area-inset-top)) max(var(--pad), env(safe-area-inset-right))
@@ -141,6 +140,7 @@ body {
 /* ---------- Mittlere Spalte ---------- */
 
 .panel {
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -184,6 +184,8 @@ body {
 /* Ergebnis */
 
 .result {
+  /* An der Spaltenbreite ausgerichtet (cqi), damit Goldringe und Schein nie über die Spalte hinausragen */
+  --disc: min(86cqi, 40dvh);
   display: flex;
   flex-direction: column;
   align-items: center;
