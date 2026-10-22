@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Roulette</title>
+  <meta name="description" content="Roulette-Drehteller mit Auslosung der Gewinnzahl">
+  <meta name="theme-color" content="#0b4227">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Roulette">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/playfair-display-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <main class="table">
+    <section class="wheel-area">
+      <div class="wheel" id="wheel" role="img" aria-label="Roulette-Kessel"></div>
+    </section>
+
+    <section class="panel">
+      <header class="brand">
+        <h1>Roulette</h1>
+        <p class="brand-sub">Européenne</p>
+      </header>
+
+      <div class="result" id="result" data-color="none" aria-live="polite">
+        <div class="result-disc">
+          <span class="result-number" id="result-number">?</span>
+        </div>
+        <p class="result-color" id="result-color">&nbsp;</p>
+        <p class="result-terms" id="result-terms">&nbsp;</p>
+      </div>
+
+      <div class="controls">
+        <p class="status" id="status">Faites vos jeux</p>
+        <div class="buttons">
+          <button type="button" class="start" id="start">Start</button>
+          <button type="button" class="icon-button" id="settings-open" aria-label="Einstellungen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm7.4-2.5.1-1-.1-1 2.1-1.6a.5.5 0 0 0 .1-.6l-2-3.5a.5.5 0 0 0-.6-.2l-2.5 1a7.4 7.4 0 0 0-1.7-1l-.4-2.6a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4l-.4 2.6c-.6.3-1.2.6-1.7 1l-2.5-1a.5.5 0 0 0-.6.2l-2 3.5a.5.5 0 0 0 .1.6L4.6 11l-.1 1 .1 1-2.1 1.6a.5.5 0 0 0-.1.6l2 3.5c.1.2.4.3.6.2l2.5-1c.5.4 1.1.7 1.7 1l.4 2.6c0 .2.3.4.5.4h4c.2 0 .5-.2.5-.4l.4-2.6c.6-.3 1.2-.6 1.7-1l2.5 1c.2.1.5 0 .6-.2l2-3.5a.5.5 0 0 0-.1-.6L19.4 13Z"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="board" aria-label="Letzte 20 Ziehungen">
+      <h2 class="board-title">Letzte 20</h2>
+      <div class="board-head" aria-hidden="true"><i class="dot-red"></i><i class="dot-green"></i><i class="dot-black"></i></div>
+      <ol class="board-list" id="history"></ol>
+    </aside>
+  </main>
+
+  <dialog class="settings" id="settings">
+    <h2>Einstellungen</h2>
+    <label class="setting">
+      <span class="setting-label">Drehdauer <output id="setting-duration-value"></output></span>
+      <input type="range" id="setting-duration" min="4" max="15" step="0.5">
+    </label>
+    <label class="setting setting-toggle">
+      <span class="setting-label">Geräusche<small>Rollen und Klacken der Kugel</small></span>
+      <input type="checkbox" id="setting-sound" role="switch">
+    </label>
+    <label class="setting setting-toggle">
+      <span class="setting-label">Ansage<small>„Rien ne va plus“ und Gewinnzahl</small></span>
+      <input type="checkbox" id="setting-announce" role="switch">
+    </label>
+    <button type="button" class="dialog-close" id="settings-close">Fertig</button>
+  </dialog>
+
+  <div class="rotate-hint" role="alert">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="18" y="6" width="28" height="44" rx="4"/><path d="M10 40a24 24 0 0 0 24 18m0 0-5-5m5 5-5 4" fill="none"/></svg>
+    <p>Bitte das iPad ins Querformat drehen</p>
+  </div>
+</body>
+</html>
